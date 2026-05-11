@@ -9,7 +9,8 @@ from abacusagent.modules.util.comm import generate_work_path, link_abacusjob, ru
 def abacus_vibration_analysis(abacus_inputs_dir: Path,
                               selected_atoms: Optional[List[int]] = None,
                               stepsize: float = 0.01,
-                              temperature: Optional[float] = 298.15):
+                              temperature: Optional[float] = 298.15,
+                              work_root: str | None = None):
     """
     Performing vibrational analysis using finite displacement method.
     This tool function is usually followed by a relax calculation (`calculation` is set to `relax`).
@@ -40,7 +41,7 @@ def abacus_vibration_analysis(abacus_inputs_dir: Path,
         if stepsize <= 0:
             raise ValueError("stepsize should be positive.")
         
-        work_path = Path(generate_work_path()).absolute()
+        work_path = Path(generate_work_path(base_dir=work_root)).absolute()
         link_abacusjob(src=abacus_inputs_dir,
                        dst=work_path,
                        copy_files=["INPUT", "STRU", "KPT"],

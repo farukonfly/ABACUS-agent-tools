@@ -26,6 +26,7 @@ def abacus_prepare(
     init_mag: Optional[Dict[str, float]] = None,
     afm: bool = False,
     extra_input: Optional[Dict[str, Any]] = None,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Prepare mandatory input files for ABACUS calculation from a structure file.
@@ -65,7 +66,7 @@ def abacus_prepare(
         ValueError: If LCAO basis set is selected but no orbital library path is provided.
         RuntimeError: If there is an error preparing input files.
     """
-    return _abacus_prepare(stru_file, stru_type, job_type, lcao, nspin, soc, dftu, dftu_param, init_mag, afm, extra_input)
+    return _abacus_prepare(stru_file, stru_type, job_type, lcao, nspin, soc, dftu, dftu_param, init_mag, afm, extra_input, work_root=work_root)
 
 @mcp.tool()
 def abacus_modify_input(

@@ -17,6 +17,7 @@ def abacus_do_relax(
     fixed_axes: Optional[Literal["None", "volume", "shape", "a", "b", "c", "ab", "ac", "bc"]] = None,
     relax_method: Optional[Literal["cg", "bfgs", "bfgs_trad", "cg_bfgs", "sd", "fire"]] = None,
     relax_new: Optional[bool] = None,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Perform relaxation calculations using ABACUS based on the provided input files. The results of the relaxation and 
@@ -84,7 +85,7 @@ def abacus_do_relax(
             raise RuntimeError(f"Invalid ABACUS input files: {msg}")
         
         abacus_inputs_dir = Path(abacus_inputs_dir).absolute()
-        work_path = Path(generate_work_path()).absolute()
+        work_path = Path(generate_work_path(base_dir=work_root)).absolute()
         link_abacusjob(src=abacus_inputs_dir,
                        dst=work_path,
                        copy_files=["INPUT", "STRU", "KPT"])
@@ -116,7 +117,8 @@ def abacus_do_relax(
 
 
 def abacus_prepare_inputs_from_relax_results(
-    relax_jobpath: Path
+    relax_jobpath: Path,
+    work_root: str | None = None,
 )-> Dict[str, Any]:
     """
     Prepare ABACUS input files based on the structure of the last relaxation step.
@@ -140,7 +142,7 @@ def abacus_prepare_inputs_from_relax_results(
             raise FileNotFoundError(f"We can not find the structure file of last relax step {final_stru}. \
                 Please check the path and ensure the relaxation calculation has completed successfully.")
 
-        work_path = Path(generate_work_path()).absolute()
+        work_path = Path(generate_work_path(base_dir=work_root)).absolute()
 
         link_abacusjob(
             src=relax_jobpath,

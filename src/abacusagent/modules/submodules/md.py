@@ -95,7 +95,8 @@ def abacus_run_md(
     md_pmode: Literal['iso', 'aniso', 'tri'] = 'iso',
     md_pcouple: Literal['none', 'xy', 'xz', 'yz', 'xyz'] = 'none',
     md_dumpfreq: int = 1,
-    md_seed: int = -1
+    md_seed: int = -1,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Use ABACUS to do ab-initio molecular dynamics calculation.
@@ -143,7 +144,7 @@ def abacus_run_md(
             - normal_end (bool): Whether the ab-initio molecular dynamics calculation ended normally.
     """
     try:
-        work_path = Path(generate_work_path()).absolute()
+        work_path = Path(generate_work_path(base_dir=work_root)).absolute()
         link_abacusjob(src=abacus_inputs_dir, dst=work_path, copy_files=['INPUT', 'STRU'], exclude_directories=True)
         input_params = ReadInput(os.path.join(work_path, "INPUT"))
 

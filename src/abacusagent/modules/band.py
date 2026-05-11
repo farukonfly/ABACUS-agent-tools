@@ -11,7 +11,8 @@ def abacus_cal_band(abacus_inputs_dir: Path,
                     high_symm_points: Dict[str, List[float]] = None,
                     energy_min: float = -10,
                     energy_max: float = 10,
-                    insert_point_nums: int = 30
+                    insert_point_nums: int = 30,
+                    work_root: str | None = None,
 ) -> Dict[str, float|str]:
     """
     Calculate band using ABACUS based on prepared directory containing the INPUT, STRU, KPT, and pseudopotential or orbital files.
@@ -41,5 +42,5 @@ def abacus_cal_band(abacus_inputs_dir: Path,
         A dictionary containing band gap, path to the work directory for calculating band and path to the plotted band.
     Raises:
     """
-    return _abacus_cal_band(abacus_inputs_dir, mode, kpath, high_symm_points, energy_min, energy_max, insert_point_nums)
+    return _abacus_cal_band(abacus_inputs_dir, mode, kpath, high_symm_points, energy_min, energy_max, insert_point_nums, work_root=work_root)
 

@@ -15,6 +15,7 @@ def generate_bulk_structure(element: str,
                            cubic: bool =False,
                            orthorhombic: bool =False,
                            file_format: Literal["cif", "poscar"] = "cif",
+                           work_root: str | None = None,
                            ) -> Dict[str, Any]:
     """
     Generate a bulk crystal structure using ASE's `bulk` function.
@@ -55,7 +56,7 @@ def generate_bulk_structure(element: str,
     >>> gaas_zincblende = generate_bulk_structure('GaAs', 'zincblende', a=5.65, cubic=True)
     
     """
-    return _generate_bulk_structure(element, crystal_structure, a, c, cubic, orthorhombic, file_format)
+    return _generate_bulk_structure(element, crystal_structure, a, c, cubic, orthorhombic, file_format, work_root=work_root)
 
 @mcp.tool()
 def generate_bulk_structure_from_wyckoff_position(
@@ -68,7 +69,8 @@ def generate_bulk_structure_from_wyckoff_position(
     spacegroup: str | int,
     wyckoff_positions: List[Tuple[str, List[float], str]],
     crystal_name: str = 'crystal',
-    format: Literal["cif", "poscar"] = "cif"
+    format: Literal["cif", "poscar"] = "cif",
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Generate crystal structure from lattice parameters, space group and wyckoff positions.
@@ -86,7 +88,7 @@ def generate_bulk_structure_from_wyckoff_position(
 
     Raises:
     """
-    return _generate_bulk_structure_from_wyckoff_position(a, b, c, alpha, beta, gamma, spacegroup, wyckoff_positions, crystal_name, format)
+    return _generate_bulk_structure_from_wyckoff_position(a, b, c, alpha, beta, gamma, spacegroup, wyckoff_positions, crystal_name, format, work_root=work_root)
 
 @mcp.tool()
 def generate_molecule_structure(
@@ -121,7 +123,9 @@ def generate_molecule_structure(
                            'Mc', 'Lv', 'Ts', 'Og'] = "H2O",
     cell: Optional[List[List[float]]] = [[10.0, 0.0, 0.0], [0.0, 10.0, 0.0], [0.0, 0.0, 10.0]],
     vacuum: Optional[float] = 5.0,
-    output_file_format: Literal["cif", "poscar", "abacus"] = "abacus") -> Dict[str, Any]:
+    output_file_format: Literal["cif", "poscar", "abacus"] = "abacus",
+    work_root: str | None = None,
+) -> Dict[str, Any]:
     """
     Generate molecule structure from ase's collection of molecules or single atoms.
     Args:
@@ -136,7 +140,7 @@ def generate_molecule_structure(
         - cell: The cell parameters of the generated structure as a list of lists.
         - coordinate: The atomic coordinates of the generated structure as a list of lists.
     """
-    return _generate_molecule_structure(molecule_name, cell, vacuum, output_file_format)
+    return _generate_molecule_structure(molecule_name, cell, vacuum, output_file_format, work_root=work_root)
 
 @mcp.tool()
 def get_ieee_standard_structure(

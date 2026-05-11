@@ -28,6 +28,7 @@ def abacus_prepare(
     init_mag: Optional[Dict[str, float]] = None,
     afm: bool = False,
     extra_input: Optional[Dict[str, Any]] = None,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Prepare mandatory input files for ABACUS calculation from a structure file.
@@ -86,7 +87,7 @@ def abacus_prepare(
         if lcao and not os.path.exists(orb_path):
             raise FileNotFoundError(f"Orbital library path {orb_path} does not exist.")
 
-        work_path = generate_work_path()
+        work_path = generate_work_path(base_dir=work_root)
         pwd = os.getcwd()
         os.chdir(work_path)
         try:

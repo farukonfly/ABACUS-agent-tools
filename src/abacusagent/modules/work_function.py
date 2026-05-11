@@ -9,6 +9,7 @@ def abacus_cal_work_function(
     abacus_inputs_dir: Path,
     vacuum_direction: Literal['x', 'y', 'z'] = 'z',
     dipole_correction: bool = False,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Calculate the electrostatic potential and work function using ABACUS.
@@ -29,4 +30,4 @@ def abacus_cal_work_function(
             - 'plateau_start_fractional': Fractional coordinate of start of the identified plateau in the given vacuum direction
             - 'plateau_end_fractional': Fractional coordinate of end of the identified plateau in the given vacuum direction
     """
-    return _abacus_cal_work_function(abacus_inputs_dir, vacuum_direction, dipole_correction)
+    return _abacus_cal_work_function(abacus_inputs_dir, vacuum_direction, dipole_correction, work_root=work_root)

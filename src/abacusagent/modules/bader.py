@@ -7,7 +7,8 @@ from abacusagent.modules.submodules.bader import calculate_bader_charge_from_cub
 
 @mcp.tool() # make it visible to the MCP server
 def abacus_badercharge_run(
-    abacus_inputs_dir: Path
+    abacus_inputs_dir: Path,
+    work_root: str | None = None,
 ) -> List[float]:
     """
     Calculate Bader charges for a given ABACUS input file directory, with ABACUS as
@@ -27,11 +28,12 @@ def abacus_badercharge_run(
         - badercharge_run_workpath: Absolute path to the Bader analysis work directory.
         - bader_result_csv: Absolute path to the CSV file containing detailed Bader charge results
     """
-    return _abacus_badercharge_run(abacus_inputs_dir)
+    return _abacus_badercharge_run(abacus_inputs_dir, work_root=work_root)
 
 @mcp.tool()
 def calculate_bader_charge_from_cube(
-    fcube: List[Path]|Path
+    fcube: List[Path]|Path,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Postprocess the charge density to obtain Bader charges.
@@ -50,4 +52,4 @@ def calculate_bader_charge_from_cube(
         - cube_file: Absolute path to the cube file used in this tool.
         - charge_results_json: Absolute path to the JSON file containing detailed Bader charge results
     """
-    return _calculate_bader_charge_from_cube(fcube)
+    return _calculate_bader_charge_from_cube(fcube, work_root=work_root)

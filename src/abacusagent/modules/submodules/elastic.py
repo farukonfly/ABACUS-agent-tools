@@ -86,7 +86,8 @@ def abacus_cal_elastic(
     norm_strain: float = 0.01,
     shear_strain: float = 0.01,
     kspacing: float = 0.08,
-    relax_force_thr_ev: float = 0.01
+    relax_force_thr_ev: float = 0.01,
+    work_root: str | None = None,
 ) -> Dict[str, float]:
     """
     Calculate various elastic constants for a given structure using ABACUS. 
@@ -113,7 +114,7 @@ def abacus_cal_elastic(
             raise RuntimeError(f"Invalid ABACUS input files: {msg}")
         
         abacus_inputs_dir = Path(abacus_inputs_dir).absolute()
-        work_path = Path(generate_work_path()).absolute()
+        work_path = Path(generate_work_path(base_dir=work_root)).absolute()
         input_stru_dir = Path(os.path.join(work_path, "input_stru")).absolute()
 
         link_abacusjob(src=abacus_inputs_dir,

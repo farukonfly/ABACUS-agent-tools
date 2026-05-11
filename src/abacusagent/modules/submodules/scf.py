@@ -10,6 +10,7 @@ from abacusagent.modules.util.comm import generate_work_path, link_abacusjob, ru
 
 def abacus_calculation_scf(
     abacus_inputs_dir: Path,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Run ABACUS SCF calculation.
@@ -25,7 +26,7 @@ def abacus_calculation_scf(
         if not is_valid:
             raise RuntimeError(f"Invalid ABACUS input files: {msg}")
         
-        work_path = Path(generate_work_path()).absolute()
+        work_path = Path(generate_work_path(base_dir=work_root)).absolute()
         link_abacusjob(src=abacus_inputs_dir, dst=work_path, copy_files=['INPUT', 'STRU'])
         input_params = ReadInput(os.path.join(work_path, "INPUT"))
 

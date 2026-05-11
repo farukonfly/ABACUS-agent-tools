@@ -7,6 +7,7 @@ from abacusagent.modules.submodules.scf import abacus_calculation_scf as _abacus
 @mcp.tool()
 def abacus_calculation_scf(
     abacus_inputs_dir: Path,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Run ABACUS SCF calculation.
@@ -17,4 +18,4 @@ def abacus_calculation_scf(
         A dictionary containing the path to output file of ABACUS calculation, and a dictionary containing whether the SCF calculation
         finished normally, the SCF is converged or not, the converged SCF energy and total time used.
     """
-    return _abacus_calculation_scf(abacus_inputs_dir)
+    return _abacus_calculation_scf(abacus_inputs_dir, work_root=work_root)

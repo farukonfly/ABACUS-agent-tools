@@ -9,6 +9,7 @@ from abacusagent.modules.submodules.jdos_pyatb import pyatb_calculate_jdos as _p
 @mcp.tool()
 def pyatb_calculate_jdos(
     abacus_inputs_dir: Path,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Plot the joint density of states (JDOS) using pyatb after ABACUS SCF calculation.
@@ -17,4 +18,4 @@ def pyatb_calculate_jdos(
     Returns:
         Dict[str, Any]: A dictionary containing path to the plotted JDOS.
     """
-    return _pyatb_calculate_jdos(abacus_inputs_dir)
+    return _pyatb_calculate_jdos(abacus_inputs_dir, work_root=work_root)

@@ -50,6 +50,7 @@ def abacus_dos_run(
     dos_emin_ev: float = None,
     dos_emax_ev: float = None,
     dos_nche: int = None,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """Run the DOS and PDOS calculation.
     
@@ -95,14 +96,15 @@ def abacus_dos_run(
         if nspin in [4]:
             raise ValueError("Currently DOS calculation can only be plotted using for nspin=1 and nspin=2")
         
-        metrics_scf = abacus_dos_run_scf(abacus_inputs_dir)
+        metrics_scf = abacus_dos_run_scf(abacus_inputs_dir, work_root=work_root)
         metrics_nscf = abacus_dos_run_nscf(metrics_scf["scf_work_path"],
                                            dos_edelta_ev=dos_edelta_ev,
                                            dos_sigma=dos_sigma,
                                            dos_scale=dos_scale, 
                                            dos_emin_ev=dos_emin_ev,
                                            dos_emax_ev=dos_emax_ev,
-                                           dos_nche=dos_nche)
+                                           dos_nche=dos_nche,
+                                           work_root=work_root)
 
         fig_paths = plot_dos_pdos(metrics_scf["scf_work_path"],
                                   metrics_nscf["nscf_work_path"],
@@ -124,7 +126,8 @@ def abacus_dos_run(
         return {"message": f"Calculating DOS and PDOS failed: {e}"}
 
 def abacus_dos_run_scf(abacus_inputs_dir: Path,
-                       force_run: bool = False) -> Dict[str, Any]:
+                       force_run: bool = False,
+                       work_root: str | None = None) -> Dict[str, Any]:
     """
     Run the SCF calculation to generate the charge density file.
     If the charge file already exists, it will skip the SCF calculation.
@@ -143,7 +146,7 @@ def abacus_dos_run_scf(abacus_inputs_dir: Path,
         print("Charge file already exists, skipping SCF calculation.")
         work_path = abacus_inputs_dir
     else:
-        work_path = generate_work_path()
+        work_path = generate_work_path(base_dir=work_root)
         link_abacusjob(src=abacus_inputs_dir,
                        dst=work_path,
                        copy_files=["INPUT"])
@@ -171,9 +174,10 @@ def abacus_dos_run_nscf(abacus_inputs_dir: Path,
                         dos_scale: float = None,
                         dos_emin_ev: float = None,
                         dos_emax_ev: float = None,
-                        dos_nche: int = None,) -> Dict[str, Any]:
+                        dos_nche: int = None,
+                        work_root: str | None = None) -> Dict[str, Any]:
     
-    work_path = generate_work_path()
+    work_path = generate_work_path(base_dir=work_root)
     link_abacusjob(src=abacus_inputs_dir,
                    dst=work_path,
                    copy_files=["INPUT"])

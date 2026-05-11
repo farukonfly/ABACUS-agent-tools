@@ -14,6 +14,7 @@ def abacus_do_relax(
     fixed_axes: Optional[Literal["None", "volume", "shape", "a", "b", "c", "ab", "ac", "bc"]] = None,
     relax_method: Optional[Literal["cg", "bfgs", "bfgs_trad", "cg_bfgs", "sd", "fire"]] = None,
     relax_new: Optional[bool] = None,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Perform relaxation calculations using ABACUS based on the provided input files. The results of the relaxation and 
@@ -82,6 +83,7 @@ def abacus_do_relax(
                            relax_cell=relax_cell,
                            fixed_axes=fixed_axes,
                            relax_method=relax_method,
-                           relax_new=relax_new
+                           relax_new=relax_new,
+                           work_root=work_root
     )
     

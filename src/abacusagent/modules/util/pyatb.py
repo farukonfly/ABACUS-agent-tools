@@ -22,7 +22,8 @@ from abacusagent.modules.util.comm import collect_metrics
 def property_calculation_scf(
     abacus_inputs_path: Path,
     mode: Literal["nscf", "pyatb", "auto"] = "auto",
-    always_run: bool = False
+    always_run: bool = False,
+    work_root: str | None = None,
 ):
     """Perform the SCF calculation for property calculations like DOS or band structure.
 
@@ -57,7 +58,7 @@ def property_calculation_scf(
         else:
             raise ValueError(f"Invalid mode: {mode}. Use 'nscf', 'pyatb', or 'auto'.")
         
-        work_path = Path(generate_work_path()).absolute()
+        work_path = Path(generate_work_path(base_dir=work_root)).absolute()
         link_abacusjob(src=abacus_inputs_path,
                        dst=work_path,
                        copy_files=["INPUT", "STRU", "KPT"])
@@ -80,7 +81,7 @@ def property_calculation_scf(
             if basis_type == "pw" and mode == "pyatb":
                 raise ValueError("Pyatb mode is not supported for PW basis. Please use 'nscf' mode instead.")
 
-            work_path = Path(generate_work_path()).absolute()
+            work_path = Path(generate_work_path(base_dir=work_root)).absolute()
             link_abacusjob(src=abacus_inputs_path,
                            dst=work_path,
                            copy_files=["INPUT", "STRU", "KPT"])

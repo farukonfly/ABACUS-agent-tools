@@ -23,7 +23,8 @@ def abacus_phonon_dispersion(
     temperature: Optional[float] = 298.15,
     min_supercell_length: float = 10.0,
     qpath: Optional[Union[List[str], List[List[str]]]] = None,
-    high_symm_points: Optional[Dict[str, List[float]]] = None
+    high_symm_points: Optional[Dict[str, List[float]]] = None,
+    work_root: str | None = None,
 ):
     """
     Calculate phonon dispersion with finite-difference method using Phonopy with ABACUS as the calculator. 
@@ -60,7 +61,7 @@ def abacus_phonon_dispersion(
         if not is_valid:
             raise RuntimeError(f"Invalid ABACUS input files: {msg}")
         
-        work_path = Path(generate_work_path()).absolute()
+        work_path = Path(generate_work_path(base_dir=work_root)).absolute()
 
         input_params = ReadInput(os.path.join(abacus_inputs_dir, "INPUT"))
         stru_file = input_params.get('stru_file', "STRU")

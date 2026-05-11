@@ -13,6 +13,7 @@ def abacus_dos_run(
     dos_emin_ev: float = None,
     dos_emax_ev: float = None,
     dos_nche: int = None,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """Run the DOS and PDOS calculation.
     
@@ -47,4 +48,4 @@ def abacus_dos_run(
             - nscf_work_path: Path to the work directory of NSCF calculation.
             - nscf_normal_end: If the SCF calculation ended normally.
     """
-    return _abacus_dos_run(abacus_inputs_dir, pdos_mode, dos_edelta_ev, dos_sigma, dos_scale, dos_emin_ev, dos_emax_ev, dos_nche)
+    return _abacus_dos_run(abacus_inputs_dir, pdos_mode, dos_edelta_ev, dos_sigma, dos_scale, dos_emin_ev, dos_emax_ev, dos_nche, work_root=work_root)

@@ -85,6 +85,7 @@ def generate_bulk_structure(element: str,
                            cubic: bool =False,
                            orthorhombic: bool =False,
                            file_format: Literal["cif", "poscar"] = "cif",
+                           work_root: str | None = None,
                            ) -> Dict[str, Any]:
     """
     Generate a bulk crystal structure using ASE's `bulk` function.
@@ -146,7 +147,7 @@ def generate_bulk_structure(element: str,
             a=a,
             **special_params
         )
-        work_path = generate_work_path(create=True)
+        work_path = generate_work_path(create=True, base_dir=work_root)
 
         if file_format == "cif":
             structure_file = f"{work_path}/{element}_{crystal_structure}.cif"
@@ -174,7 +175,8 @@ def generate_bulk_structure_from_wyckoff_position(
     spacegroup: str | int,
     wyckoff_positions: List[Tuple[str, List[float], str]],
     crystal_name: str = 'crystal',
-    format: Literal["cif", "poscar"] = "cif"
+    format: Literal["cif", "poscar"] = "cif",
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Generate crystal structure from lattice parameters, space group and wyckoff positions.
@@ -204,7 +206,7 @@ def generate_bulk_structure_from_wyckoff_position(
             tol=0.001,
         )
 
-        work_path = generate_work_path(create=True)
+        work_path = generate_work_path(create=True, base_dir=work_root)
         
         crys_file_name = Path(f"{work_path}/{crystal_name}.{format}").absolute()
         write(crys_file_name, crys_stru.to_ase_atoms(), format)
@@ -246,7 +248,9 @@ def generate_molecule_structure(
                            'Mc', 'Lv', 'Ts', 'Og'] = "H2O",
     cell: Optional[List[List[float]]] = [[10.0, 0.0, 0.0], [0.0, 10.0, 0.0], [0.0, 0.0, 10.0]],
     vacuum: Optional[float] = 5.0,
-    output_file_format: Literal["cif", "poscar", "abacus"] = "abacus") -> Dict[str, Any]:
+    output_file_format: Literal["cif", "poscar", "abacus"] = "abacus",
+    work_root: str | None = None,
+) -> Dict[str, Any]:
     """
     Generate molecule structure from ase's collection of molecules or single atoms.
     Args:
@@ -271,7 +275,7 @@ def generate_molecule_structure(
         elif molecule_name in chemical_symbols and molecule_name != "X":
             atoms = Atoms(symbol=molecule_name, positions=[[0, 0, 0]], cell=cell)
 
-        work_path = generate_work_path(create=True)
+        work_path = generate_work_path(create=True, base_dir=work_root)
         
         if output_file_format == "abacus":
             stru_file_path = Path(f"{work_path}/{molecule_name}.stru").absolute()

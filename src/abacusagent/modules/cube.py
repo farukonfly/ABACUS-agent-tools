@@ -11,7 +11,7 @@ from abacusagent.modules.submodules.cube import abacus_cal_elf as _abacus_cal_el
 from abacusagent.modules.submodules.cube import abacus_cal_charge_density_difference as _abacus_cal_charge_density_difference
 from abacusagent.modules.submodules.cube import abacus_cal_spin_density as _abacus_cal_spin_density
 @mcp.tool()
-def abacus_cal_elf(abacus_inputs_dir: Path):
+def abacus_cal_elf(abacus_inputs_dir: Path, work_root: str | None = None):
     """
     Calculate electron localization function (ELF) using ABACUS.
     
@@ -27,12 +27,13 @@ def abacus_cal_elf(abacus_inputs_dir: Path):
         ValueError: If the nspin in INPUT is not 1 or 2.
         FileNotFoundError: If the ELF file is not found in the output directory.
     """
-    return _abacus_cal_elf(abacus_inputs_dir)
+    return _abacus_cal_elf(abacus_inputs_dir, work_root=work_root)
 
 @mcp.tool()
 def abacus_cal_charge_density_difference(
     abacus_inputs_dir: Path,
     subsys1_atom_index: Optional[List[int]] = [0],
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Calculate charge density difference using ABACUS.
@@ -50,11 +51,12 @@ def abacus_cal_charge_density_difference(
     Raises:
         FileNotFoundError: If the charge density difference file is not found in the output directory.
     """
-    return _abacus_cal_charge_density_difference(abacus_inputs_dir, subsys1_atom_index)
+    return _abacus_cal_charge_density_difference(abacus_inputs_dir, subsys1_atom_index, work_root=work_root)
 
 @mcp.tool()
 def abacus_cal_spin_density(
-    abacus_inputs_dir: Path
+    abacus_inputs_dir: Path,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Calculate the spin density for collinear spin-polarized system (nspin=2).
@@ -70,4 +72,4 @@ def abacus_cal_spin_density(
     Raises:
         ValueError: If nspin in INPUT file is not 2.
     """
-    return _abacus_cal_spin_density(abacus_inputs_dir)
+    return _abacus_cal_spin_density(abacus_inputs_dir, work_root=work_root)

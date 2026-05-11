@@ -86,7 +86,8 @@ def ver_cmp(v1: str|tuple[int], v2: str|tuple[int]) -> int:
     return (v1 > v2) - (v1 < v2)  # Returns 1, 0, or -1
 
 def calculate_charge_densities_with_abacus(
-    abacus_inputs_dir: Path
+    abacus_inputs_dir: Path,
+    work_root: str | None = None,
 ) -> Optional[List[str]]:
     """
     Calculate the charge density using ABACUS in the specified job directory.
@@ -98,7 +99,7 @@ def calculate_charge_densities_with_abacus(
     list: List of file names for the charge density cube files.
     """
     # get the abacus version with `abacus --version`
-    work_path = generate_work_path()
+    work_path = generate_work_path(base_dir=work_root)
     link_abacusjob(src=abacus_inputs_dir,
                    dst=work_path,
                    copy_files=["INPUT"])
@@ -196,7 +197,8 @@ def calculate_bader_charges(
     return files
 
 def calculate_bader_charge_from_cube(
-    fcube: List[Path]|Path
+    fcube: List[Path]|Path,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     postprocess the charge density to obtain Bader charges.
@@ -221,7 +223,7 @@ def calculate_bader_charge_from_cube(
     merged_cube_file = Path(merged_cube_file).absolute()
     
     cwd = os.getcwd()
-    work_path = generate_work_path()
+    work_path = generate_work_path(base_dir=work_root)
     os.chdir(work_path)
 
     # Copy the merged cube file to the work path for Bader analysis to avoid too long path for `bader` executable
@@ -262,7 +264,8 @@ def calculate_bader_charge_from_cube(
 
 
 def abacus_badercharge_run(
-    abacus_inputs_dir: Path
+    abacus_inputs_dir: Path,
+    work_root: str | None = None,
 ) -> List[float]:
     """
     Calculate Bader charges for a given ABACUS input file directory, with ABACUS as
@@ -288,7 +291,7 @@ def abacus_badercharge_run(
             raise RuntimeError(f"Invalid ABACUS input files: {msg}")
         
         # Run ABACUS to calculate charge density
-        results = calculate_charge_densities_with_abacus(abacus_inputs_dir)
+        results = calculate_charge_densities_with_abacus(abacus_inputs_dir, work_root=work_root)
         abacus_jobpath = results["work_path"]
         fcube = results["cube_files"]
 
@@ -299,7 +302,7 @@ def abacus_badercharge_run(
             atom_labels = None
 
         # Postprocess the charge density to obtain Bader charges
-        bader_results = calculate_bader_charge_from_cube(fcube)
+        bader_results = calculate_bader_charge_from_cube(fcube, work_root=work_root)
 
         # Write necessary results to csv file
         bader_result_csv = Path("./bader_charge_results.csv").absolute()

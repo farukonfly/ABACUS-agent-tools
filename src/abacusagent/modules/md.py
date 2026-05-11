@@ -16,7 +16,8 @@ def abacus_run_md(
     md_pmode: Literal['iso', 'aniso', 'tri'] = 'iso',
     md_pcouple: Literal['none', 'xy', 'xz', 'yz', 'xyz'] = 'none',
     md_dumpfreq: int = 1,
-    md_seed: int = -1
+    md_seed: int = -1,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Use ABACUS to do ab-initio molecular dynamics calculation.
@@ -74,5 +75,6 @@ def abacus_run_md(
         md_pmode,
         md_pcouple,
         md_dumpfreq,
-        md_seed
+        md_seed,
+        work_root=work_root
     )

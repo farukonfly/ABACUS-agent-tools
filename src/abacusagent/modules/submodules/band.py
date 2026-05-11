@@ -326,7 +326,8 @@ def abacus_cal_band(abacus_inputs_dir: Path,
                     high_symm_points: Dict[str, List[float]] = None,
                     energy_min: float = -10,
                     energy_max: float = 10,
-                    insert_point_nums: int = 30
+                    insert_point_nums: int = 30,
+                    work_root: str | None = None,
 ) -> Dict[str, float|str]:
     """
     Calculate band using ABACUS based on prepared directory containing the INPUT, STRU, KPT, and pseudopotential or orbital files.
@@ -389,7 +390,7 @@ def abacus_cal_band(abacus_inputs_dir: Path,
             print("kpath and high_symm_points must be used together. Use auto-generated kpath and high_symm_points")
         
         force_run = True if original_stru.get_natoms() != new_stru.get_natoms() else False
-        scf_output = property_calculation_scf(abacus_inputs_dir, mode, always_run=force_run)
+        scf_output = property_calculation_scf(abacus_inputs_dir, mode, always_run=force_run, work_root=work_root)
         work_path, mode = scf_output["work_path"], scf_output["mode"]
         if mode == 'pyatb':
             # Obtain band using PYATB

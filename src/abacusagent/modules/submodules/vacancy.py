@@ -13,6 +13,7 @@ def abacus_cal_vacancy_formation_energy(
     supercell: List[int],
     vacancy_index: int,
     relax_precision: Literal['low', 'medium', 'high'] = 'low',
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Calculate vacancy formation energy. Currenly only non-charged vacancy of limited elements are suppoted. 
@@ -41,7 +42,7 @@ def abacus_cal_vacancy_formation_energy(
         if not is_valid:
             raise RuntimeError(f"Invalid ABACUS input files: {msg}")
 
-        work_path = Path(generate_work_path()).absolute()
+        work_path = Path(generate_work_path(base_dir=work_root)).absolute()
         original_inputs_dir = os.path.join(work_path, "original_inputs")
         ref_dir = os.path.join(work_path, "ref_element")
         link_abacusjob(src=abacus_inputs_dir, dst=original_inputs_dir, copy_files=['INPUT', 'STRU'])

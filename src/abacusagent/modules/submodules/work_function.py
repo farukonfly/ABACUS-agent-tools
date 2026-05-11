@@ -91,6 +91,7 @@ def abacus_cal_work_function(
     abacus_inputs_dir: Path,
     vacuum_direction: Literal['x', 'y', 'z'] = 'z',
     dipole_correction: bool = False,
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Calculate the electrostatic potential and work function using ABACUS.
@@ -116,7 +117,7 @@ def abacus_cal_work_function(
         if not is_valid:
             raise RuntimeError(f"Invalid ABACUS input files: {msg}")
         
-        work_path = Path(generate_work_path()).absolute()
+        work_path = Path(generate_work_path(base_dir=work_root)).absolute()
         link_abacusjob(src=abacus_inputs_dir,dst=work_path,copy_files=["INPUT", "STRU"], exclude_directories=True)
         input_params = ReadInput(os.path.join(work_path, 'INPUT'))
         stru = AbacusStru.ReadStru(os.path.join(work_path, input_params.get('stru_file', 'STRU')))

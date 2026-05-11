@@ -10,6 +10,7 @@ def abacus_cal_vacancy_formation_energy(
     supercell: List[int],
     vacancy_index: int,
     relax_precision: Literal['low', 'medium', 'high'] = 'low',
+    work_root: str | None = None,
 ) -> Dict[str, Any]:
     """
     Calculate vacancy formation energy. Currenly only non-charged vacancy of limited elements are suppoted. 
@@ -37,5 +38,6 @@ def abacus_cal_vacancy_formation_energy(
         abacus_inputs_dir,
         supercell,
         vacancy_index,
-        relax_precision
+        relax_precision,
+        work_root=work_root
     )
