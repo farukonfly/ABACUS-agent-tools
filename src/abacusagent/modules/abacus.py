@@ -56,6 +56,7 @@ def abacus_prepare(
         init_mag ( dict or None): The initial magnetic moment for magnetic elements, should be a dict like {"Fe": 4, "Ti": 1}, where the key is the element symbol and the value is the initial magnetic moment.
         afm (bool): Whether to use antiferromagnetic calculation, default is False. If True, half of the magnetic elements will be set to negative initial magnetic moment.
         extra_input: Extra input parameters in the prepared INPUT file. 
+        work_root (str | None): Optional root directory to place the work path.
     
     Returns:
         A dictionary containing the job path.

@@ -35,6 +35,7 @@ def abacus_dos_run(
         dos_emin_ev: Minimal range for Density of States (DOS) in eV.
         dos_emax_ev: Maximal range for Density of States (DOS) in eV.
         dos_nche: The order of Chebyshev expansions when using Stochastic Density Functional Theory (SDFT) to calculate DOS.
+        work_root (str | None): Optional root directory to place the work path.
         
     Returns:
         Dict[str, Any]: A dictionary containing:

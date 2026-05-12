@@ -38,6 +38,7 @@ def abacus_cal_band(abacus_inputs_dir: Path,
         energy_min (float): Lower bound of $E - E_F$ in the plotted band.
         energy_max (float): Upper bound of $E - E_F$ in the plotted band.
         insert_point_nums (int): Number of points to insert between two high symmetry points. Default is 30.
+        work_root (str | None): Optional root directory to place the work path.
     Returns:
         A dictionary containing band gap, path to the work directory for calculating band and path to the plotted band.
     Raises:

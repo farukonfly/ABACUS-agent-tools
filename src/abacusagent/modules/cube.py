@@ -17,6 +17,7 @@ def abacus_cal_elf(abacus_inputs_dir: Path, work_root: str | None = None):
     
     Args:
         abacus_inputs_dir (Path): Path to the ABACUS input files, which contains the INPUT, STRU, KPT, and pseudopotential or orbital files.
+        work_root (str | None): Optional root directory to place the work path.
     
     Returns:
         Dict[str, Any]: A dictionary containing:
@@ -42,6 +43,7 @@ def abacus_cal_charge_density_difference(
         abacus_inputs_dir (Path): Path to the ABACUS input files, which contains the INPUT, STRU, KPT, and pseudopotential or orbital files.
         subsys1_atom_index (Optional[List[int]]): Atom indices of the first subsystem. Should not be empty. The atom indices of
             the second subsystem will be determined by the remaining atoms in the full system.
+        work_root (str | None): Optional root directory to place the work path.
     
     Returns:
         Dict[str, Any]: A dictionary containing:
@@ -63,6 +65,7 @@ def abacus_cal_spin_density(
 
     Args:
         abacus_inputs_dir (Path): Path to the ABACUS input files, which contains the INPUT, STRU, KPT, and pseudopotential or orbital files.
+        work_root (str | None): Optional root directory to place the work path.
     
     Returns:
         A dictionary containing the following keys:

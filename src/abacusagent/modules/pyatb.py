@@ -15,6 +15,7 @@ def pyatb_calculate_jdos(
     Plot the joint density of states (JDOS) using pyatb after ABACUS SCF calculation.
     Args:
         abacus_inputs_path (Path): The path to the ABACUS input files.
+        work_root (str | None): Optional root directory to place the work path.
     Returns:
         Dict[str, Any]: A dictionary containing path to the plotted JDOS.
     """

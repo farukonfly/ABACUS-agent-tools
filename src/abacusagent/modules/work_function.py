@@ -18,6 +18,7 @@ def abacus_cal_work_function(
         abacus_inputs_dir (Path): Path to the ABACUS input files, which contains the INPUT, STRU, KPT, and pseudopotential or orbital files.
         vacuum_direction (Literal['x', 'y', 'z']): The direction of the vacuum.
         dipole_correction (bool): Whether to apply dipole correction along the vacuum direction. For polar slabs, it is recommended to enable dipole correction.
+        work_root (str | None): Optional root directory to place the work path.
 
     Returns:
         A dictionary containing:

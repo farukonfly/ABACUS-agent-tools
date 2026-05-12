@@ -20,6 +20,7 @@ def abacus_vibration_analysis(abacus_inputs_dir: Path,
         stepsize (float): Step size to displace cartesian coordinates of atoms during the vibrational analysis.
             Units in Angstrom. The default value (0.01 Angstrom) is generally OK.
         temperature (float): Temperature used to calculate thermodynamic quantities. Units in Kelvin.
+        work_root (str | None): Optional root directory to place the work path.
     Returns:
         A dictionary containing the following keys:
         - 'frequencies': List of real frequencies from vibrational analysis. Imaginary frequencies are represented by negative 

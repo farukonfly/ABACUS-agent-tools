@@ -18,6 +18,7 @@ def abacus_eos(
         abacus_inputs_dir (Path): Path to the ABACUS input files, which contains the INPUT, STRU, KPT, and pseudopotential or orbital files.
         stru_scale_number (int): Number of structures to generate for EOS calculation.
         scale_stepsize (float): Step size for scaling. Default is 0.02, which means 2% of the original cell size.
+        work_root (str | None): Optional root directory to place the work path.
 
     Returns:
         Dict[str, Any]: A dictionary containing EOS calculation results:

@@ -57,6 +57,7 @@ def abacus_run_md(
         md_seed (int): The random seed to initialize random numbers used in molecular dynamics calculations.
             - < 0: No srand() function is called.
             - >= 0: The function srand(md_seed) is called.
+        work_root (str | None): Optional root directory to place the work path.
     Returns:
         A dictionary containing:
             - md_work_path (Path): The working directory of the molecular dynamics calculation.

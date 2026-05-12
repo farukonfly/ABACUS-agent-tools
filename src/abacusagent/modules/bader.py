@@ -17,6 +17,7 @@ def abacus_badercharge_run(
     
     Parameters:
     abacus_inputs_dir (str): Path to the ABACUS input files, which contains the INPUT, STRU, KPT, and pseudopotential or orbital files.
+    work_root (str | None): Optional root directory to place the work path.
     
     Returns:
     dict: A dictionary containing: 
@@ -42,6 +43,7 @@ def calculate_bader_charge_from_cube(
     fcube (str or list of str): Path to the cube file(s) containing the charge density.
         - For spin-nonpolarized calculations, provide a single cube file path.
         - For spin-polarized calculations, provide a list of two cube file paths containing the spin-up and spin-down charge density respectively.
+    work_root (str | None): Optional root directory to place the work path.
     
     Returns:
     dict: A dictionary containing:

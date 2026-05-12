@@ -24,6 +24,7 @@ def abacus_cal_elastic(
         shear_strain (float): Shear strain to calculate elastic constants, default is 0.01.
         kspacing (float): K-point spacing for ABACUS calculation, default is 0.08. Units in Bohr^{-1}.
         relax_force_thr_ev (float): Threshold for force convergence of the relax calculation for each deformed structure, default is 0.02. Units in eV/Angstrom.
+        work_root (str | None): Optional root directory to place the work path.
 
     Returns:
         A dictionary containing the following keys:

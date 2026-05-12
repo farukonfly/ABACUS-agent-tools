@@ -27,6 +27,7 @@ def abacus_cal_vacancy_formation_energy(
         - 'low' means the relax calculation will be done with force_thr_ev=0.05 and stress_thr=5.0.
         - 'medium' means the relax calculation will be done with force_thr_ev=0.01 and stress_thr=1.0.
         - 'high' means the relax calculation will be done with force_thr_ev=0.005 and stress_thr=0.5.
+        work_root (str | None): Optional root directory to place the work path.
     Returns:
         A dictionary containing:
         - "vacancy_formation_energy": Calculated vacancy formation energy.

@@ -14,6 +14,7 @@ def abacus_calculation_scf(
 
     Args:
         abacusjob (str): Path to the directory containing the ABACUS input files.
+        work_root (str | None): Optional root directory to place the work path.
     Returns:
         A dictionary containing the path to output file of ABACUS calculation, and a dictionary containing whether the SCF calculation
         finished normally, the SCF is converged or not, the converged SCF energy and total time used.

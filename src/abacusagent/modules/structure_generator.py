@@ -35,7 +35,8 @@ def generate_bulk_structure(element: str,
         cubic (bool, optional): If constructing a cubic supercell for fcc, bcc, diamond, zincblende, or rocksalt structures.
         orthorhombic (bool, optional): If constructing orthorhombic cell for 'hcp' structure.
         file_format (str, optional): The format of the output file. Options are 'cif' or 'poscar'. Default is 'cif'.
-    
+        work_root (str | None): Optional root directory to place the work path.
+
     Notes: all crystal need the lattice constant a, which is the length of the unit cell (or conventional cell).
 
     Returns:
@@ -83,6 +84,7 @@ def generate_bulk_structure_from_wyckoff_position(
             the first is the symbol of the element, the second is the fractional coordinate, and the third is symbol of the wyckoff position.
         crystal_name (str, optional): Filename of the generated structure file without extension. Defaults to 'crystal'.
         format (str, optional): Format of the generated structure file. Defaults to 'cif'.
+        work_root (str | None): Optional root directory to place the work path.
     Returns:
         Path to the generated crystal structure file.
 
@@ -134,6 +136,7 @@ def generate_molecule_structure(
         cell: The cell parameters for the generated structure. Default is a 10x10x10 Angstrom cell. Units in angstrom.
         vacuum: The vacuum space to add around the molecule. Default is 5.0 Angstrom.
         output_file_format: The format of the output file. Default is 'abacus'. 'poscar' represents POSCAR format used by VASP.
+        work_root (str | None): Optional root directory to place the work path.
     Returns:
         A dictionary containing:
         - structure_file: The absolute path to the generated structure file.

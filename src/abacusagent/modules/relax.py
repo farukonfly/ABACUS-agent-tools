@@ -38,6 +38,7 @@ def abacus_do_relax(
             - bc: fix both b and c axes  
         relax_method: The relaxation method to use, can be 'cg', 'bfgs', 'bfgs_trad', 'cg_bfgs', 'sd', or 'fire'. Default is 'cg'.
         relax_new: If use new implemented CG method, default is True.
+        work_root (str | None): Optional root directory to place the work path.
 
     Returns:
         A dictionary containing:

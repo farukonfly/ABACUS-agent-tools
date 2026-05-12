@@ -35,6 +35,7 @@ def abacus_phonon_dispersion(
         high_symm_points: A dictionary containing high symmetry points and their coordinates in the band path. All points in `qpath` should be included.
             For example, {'G': [0, 0, 0], 'M': [0.5, 0.0, 0.0], 'K': [0.33333333, 0.33333333, 0.0], 'G': [0, 0, 0]}.
             Default is None. If None, will use automatically generated high symmetry points.
+        work_root (str | None): Optional root directory to place the work path.
     Returns:
         A dictionary containing:
             - phonon_work_path: Path to the directory containing phonon calculation results.
